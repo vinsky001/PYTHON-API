@@ -28,12 +28,17 @@ app.route('/books', methods=['GET'])
 def get_books():
     # Here you can fetch books data from the database
     # For now, I'll just return some sample data as a dictionary
-     books_data = [
+     output = []
+     for book in books:
+         books_data = [
         {"name": "Book 1", "description": "This is book 1."},
         {"name": "Book 2", "description": "This is book 2."},
     
-     ]
-     return {"books": "books_data" }
+         ]
+         output.append(books_data)
+         
+         return {"drinks": output}    
+          
 
 
 if __name__ == "__main__":
