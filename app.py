@@ -38,7 +38,11 @@ def get_books():
          output.append(books_data)
          
          return {"drinks": output}    
-          
+         
+@app.route('/books/<id>')
+def get_book(id):
+    book = Book.query.get_or_404(id)
+    return {"name": book.name, "description": drink.description}    
 
 
 if __name__ == "__main__":
