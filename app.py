@@ -42,7 +42,15 @@ def get_books():
 @app.route('/books/<id>')
 def get_book(id):
     book = Book.query.get_or_404(id)
-    return {"name": book.name, "description": drink.description}    
+    return {"name": book.name, "description": drink.description}  
+
+@app.route('/books', method=['POST'])
+def add_book():
+    book = Book(name=requests.json['name'], description=requests.json['description'])
+    db.session.add(book)
+    db.session.commit()
+    
+    return {'id': book.id}  
 
 
 if __name__ == "__main__":
