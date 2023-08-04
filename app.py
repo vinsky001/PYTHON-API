@@ -44,13 +44,21 @@ def get_book(id):
     book = Book.query.get_or_404(id)
     return {"name": book.name, "description": drink.description}  
 
-@app.route('/books', method=['POST'])
+@app.route('/books', methods=['POST'])
 def add_book():
     book = Book(name=requests.json['name'], description=requests.json['description'])
     db.session.add(book)
     db.session.commit()
     
-    return {'id': book.id}  
+    return {'id': book.id} 
+
+@app.route('/books/<id>', methods=['DELETE'])
+def delete_book(id):
+    book = Book.query.get(id)
+    if drink is none:
+        return {'error': 'not found'}
+    db.session.delete(drink)
+    db.session.commit()
 
 
 if __name__ == "__main__":
