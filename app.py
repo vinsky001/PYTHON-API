@@ -46,7 +46,10 @@ def get_book(id):
 
 @app.route('/books', methods=['POST'])
 def add_book():
+    #Creates a book entry on the database
     book = Book(name=requests.json['name'], description=requests.json['description'])
+    if not book:
+        abort(404, 'Not JSON')
     db.session.add(book)
     db.session.commit()
     
@@ -54,8 +57,9 @@ def add_book():
 
 @app.route('/books/<id>', methods=['DELETE'])
 def delete_book(id):
+    #Deletes a book id on database
     book = Book.query.get(id)
-    if drink is none:
+    if drink is None:
         return {'error': 'not found'}
     db.session.delete(drink)
     db.session.commit()
